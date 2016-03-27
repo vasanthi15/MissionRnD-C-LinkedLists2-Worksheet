@@ -13,12 +13,35 @@ NOTES: If length is even, return average of middle pair of numbers.
 */
 
 #include <stdio.h>
-
+#include<malloc.h>
 struct node {
 	int num;
 	struct node *next;
 };
 
 int linkedListMedian(struct node *head) {
-	return -1;
+	struct node *temp = NULL;
+	int len = 0, i = 0;
+	if (head == NULL)
+		return -1;
+	temp = (struct node*)malloc(sizeof(struct node));
+	temp = head;
+	while (temp != NULL)
+	{
+		len++;
+		temp = temp->next;
+	}
+	if (len == 1)
+		return head->num;
+	temp = head;
+	i = len / 2 - 1;
+	while (i>0)
+	{
+		temp = temp->next;
+		i--;
+	}
+	if (len % 2 != 0)
+		return temp->next->num;
+	else
+		return (temp->num + temp->next->num) / 2;
 }
